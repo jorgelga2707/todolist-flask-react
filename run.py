@@ -1,13 +1,16 @@
 from flask import Flask,request,jsonify
 from flask_mysqldb import MySQL 
+from flask_cors import CORS
+import os
 
 app = Flask(__name__)
+CORS(app)
 
 #CONFIG VALUES FOR MYSQL
-app.config['MYSQL_HOST'] = '127.0.0.1'
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'hopper123'
-app.config['MYSQL_DB'] = 'todolist'
+app.config['MYSQL_HOST'] = os.environ.get("MYSQL_ADDON_HOST")
+app.config['MYSQL_USER'] = os.environ.get("MYSQL_ADDON_USER")
+app.config['MYSQL_PASSWORD'] = os.environ.get("MYSQL_ADDON_PASSWORD")
+app.config['MYSQL_DB'] = os.environ.get("MYSQL_ADDON_DB")
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 #TABLE tarea
